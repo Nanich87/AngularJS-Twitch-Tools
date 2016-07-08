@@ -1,0 +1,67 @@
+﻿<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2>Check Channel</h2>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="input-group">
+                    <div class="input-group-addon">Channel</div>
+                    <input ng-model="vm.channelName" class="form-control ng-valid ng-dirty ng-valid-parse ng-touched ng-pristine" placeholder="Name" ng-model="searchStream" type="text">
+                    <span class="input-group-btn">
+                        <button ng-disabled="!vm.channelName" ng-click="vm.checkChannel()" class="btn btn-default">Check</button>
+                        <a ng-disabled="!vm.channelName" ng-href="{{vm.channelName ? 'channel/' + vm.channelName + '/broadcasts' : '#'}}" class="btn btn-default" role="button">View</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div ng-show="vm.channelData.stream.status === 'online'" class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="col-md-6 text-center">Preview</th>
+                            <th class="col-md-6 text-center">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="play/{{vm.channelData.stream.channel.name | lowercase}}">
+                                    <img class="img-thumbnail" src="{{vm.channelData.stream.preview}}" />
+                                </a>
+                            </td>
+                            <td>
+                                <h3>{{vm.channelData.stream.channel.name}} is playing {{vm.channelData.stream.game}}</h3>
+                                <p>{{vm.channelData.stream.channel.status}}</p>
+                                <p>Viewers: <span class="badge">{{vm.channelData.stream.viewers}}</span> | Followers: <span class="badge">{{vm.channelData.stream.channel.followers}}</span></p>
+                                <br />
+                                <div class="btn-toolbar" role="toolbar" aria-label="Channel Toolbar">
+                                    <div class="btn-group" role="group" aria-label="Stream">
+                                        <a href="live/{{vm.channelData.stream.channel.name | lowercase}}" class="btn btn-info" role="button">
+                                            Twitch Player
+                                        </a>
+                                        <a href="{{vm.channelData.stream.url}}" class="btn btn-default" role="button">
+                                            External Player
+                                        </a>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Stream">
+                                        <a href="channel/{{vm.channelData.stream.channel.name | lowercase}}/broadcasts" class="btn btn-success" role="button">
+                                            {{vm.channelData.stream.channel.name | lowercase}}
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div ng-show="vm.channelData.stream.status === 'offline'">
+            <div class="alert alert-info" role="alert">
+                Channel is offline!
+            </div>
+        </div>
+    </div>
+</div>

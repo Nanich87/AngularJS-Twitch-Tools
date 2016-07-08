@@ -1,0 +1,22 @@
+﻿<div class="panel panel-success">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <h2>Summary</h2>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div ng-show="vm.showSummary" class="row text-center">
+            <div class="col-md-6">
+                <strong>Channels:</strong> <span class="badge">{{vm.channels}}</span>
+            </div>
+            <div class="col-md-6">
+                <strong>Viewers:</strong> <span class="badge">{{vm.viewers}}</span>
+            </div>
+        </div>
+        <div ng-hide="vm.showSummary" class="row">
+            <div class="alert alert-info" role="alert">
+                Cannot get summary!
+            </div>
+        </div>
+    </div>
+</div>

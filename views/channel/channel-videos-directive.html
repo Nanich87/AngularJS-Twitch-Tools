@@ -1,0 +1,80 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>
+            <span>Video Filter</span>
+            <button ng-click="toggleVideoFilterVisibility()" class="btn btn-default pull-right" data-toggle="collapse" aria-expanded="false" aria-controls="collapseFilter">Toggle Visibility</button>
+        </h3>
+    </div>
+    <div ng-class="showVideoFilter === true ? 'collapse in' : 'collapse'" id="collapseFilter">
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <div class="btn-group" role="group" aria-label="Video Type">
+                        <a ng-class="{'active': vm.request.broadcasts}" ng-disabled="vm.request.broadcasts" href="channel/{{vm.channel.name}}/broadcasts" class="btn btn-default" role="button">Past Broadcasts</a>
+                        <a ng-class="{'active': !vm.request.broadcasts}" toggle-class="active" ng-disabled="!vm.request.broadcasts" href="channel/{{vm.channel.name}}/highlights" class="btn btn-default" role="button">Highlights</a>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <div class="btn-group" role="group" aria-label="Order By">
+                        <button ng-class="{'active': sortType == 'title'}" ng-click="sortType = 'title'; sortReverse = !sortReverse" class="btn btn-default">By Title</button>
+                        <button ng-class="{'active': sortType == 'game'}" ng-click="sortType = 'game'; sortReverse = !sortReverse" class="btn btn-default">By Game</button>
+                        <button ng-class="{'active': sortType == 'views'}" ng-click="sortType = 'views'; sortReverse = !sortReverse" class="btn btn-default">By Views</button>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Search">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                            <input class="form-control ng-valid ng-dirty ng-valid-parse ng-touched" placeholder="Search" ng-model="searchVideo" type="text" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="page-limit">Limit</span>
+                        <input type="number" ng-model="vm.request.limit" class="form-control" aria-describedby="page-limit" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-3 col-md-offset-9">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button ng-disabled="!vm.videos || vm.request.page === 1" class="btn btn-primary" ng-click="vm.prevPage()">&lt;&lt;</button>
+                        </span>
+                        <span class="input-group-addon" id="page-number">Page</span>
+                        <input type="number" ng-model="vm.request.page" class="form-control" aria-describedby="page-number" />
+                        <span class="input-group-btn">
+                            <button ng-disabled="!vm.videos || vm.videos.length < vm.request.limit" class="btn btn-primary" ng-click="vm.nextPage()">&gt;&gt;</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h3>{{vm.vm.request.broadcasts ? 'Broadcasts' : 'Highlights'}} <span class="badge">{{vm.videoCount}}</span></h3></div>
+    <div class="panel-body">
+        <div ng-repeat="video in vm.videos | orderBy:sortType:sortReverse | filter:searchVideo" class="col-md-4">
+            <div class="thumbnail">
+                <a href="play/{{video._id}}">
+                    <img class="img img-rounded" ng-src="{{video.preview}}" alt="{{video.title}}" />
+                </a>
+                <div class="caption">
+                    <h3 class="ellipsis">{{video.title}}</h3>
+                    <p class="ellipsis"><strong>{{video.game === null ? 'No Game Title' : video.game}}</strong></p>
+                    <p>Recorded Date: {{video.recorded_at | date:"MM/dd/yyyy 'at' h:mma"}}</p>
+                    <div class="btn-group" role="group">
+                        <a href="play/{{video._id}}" class="btn btn-info" role="button">
+                            Play <span class="badge">{{video.views}}</span>
+                        </a>
+                        <a href="download/{{video._id}}" class="btn btn-default" role="button">
+                            Download
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

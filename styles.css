@@ -1,0 +1,10 @@
+﻿body {
+    padding-top: 70px;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}

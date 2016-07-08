@@ -1,0 +1,23 @@
+﻿<div ng-show="vm.channel.status === 'online'" class="panel panel-info">
+    <div class="panel-heading">
+        <h2>{{vm.title}}</h2>
+    </div>
+    <div class="panel-body">
+        <div class="embed-responsive embed-responsive-16by9">
+            <div class="embed-responsive-item" id="twitch-player">
+
+            </div>
+        </div>
+        <p>
+            <div class="btn-group" role="group" aria-label="Channel">
+                <a href="channel/{{vm.channel.name}}/broadcasts" class="btn btn-default" role="button">View Channel</a>
+            </div>
+        </p>
+    </div>
+</div>
+<div ng-show="vm.channel.status === 'offline'" class="alert alert-info" role="alert">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Channel is offline!
+</div>
+<div ng-show="vm.channel.status === 'error'" class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> An Error occurred while getting the stream!
+</div>

@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html ng-app="twitchTools">
+<head>
+    <title>Twitch Tools</title>
+    <meta charset="utf-8" />
+    <base href="/v2/" />
+    <link href="https://bootswatch.com/slate/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.2/toastr.min.css" type="text/css" />
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.2/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-cookies.js"></script>
+    <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.js'></script>
+    <script src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+</head>
+<body ng-app="twitchTools" ng-cloak ng-controller="MainController as vm">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/v2">Twitch Tools</a>
+            </div>
+            <div ng-controller="LoginController" aria-expanded="false" id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li ng-class="{ active: isActive('/')}">
+                        <a ng-click="setActive(this)" href="home">Home</a>
+                    </li>
+                    <li ng-class="{ active: isActive('/about')}">
+                        <a href="about">About</a>
+                    </li>
+                    <li>
+                        <a href="/">v1.0</a>
+                    </li>
+                </ul>
+                <!--
+                <ul class="nav navbar-nav navbar-right">
+                    <li ng-hide="identity.isAuthenticated()">
+                        <form class="navbar-form" name="loginForm">
+                            <div class="form-group">
+                                <input type="text" required placeholder="E-mail" ng-model="user.username" class="form-control" />
+                                <input type="password" required placeholder="Password" ng-model="user.password" class="form-control" />
+                            </div>
+                            <button ng-click="login(user, loginForm)" class="btn btn-primary">Login</button>
+                            <a href="register" class="btn btn-primary">Register</a>
+                        </form>
+                    </li>
+                    <li ng-show="identity.isAuthenticated()" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ identity.getCurrentUser().userName }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" ng-click="">Sign Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                -->
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" ng-view>
+
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted text-center">Twitch Tools v2.0.20151229</p>
+        </div>
+    </footer>
+
+    <script src="scripts/app/app.js"></script>
+    <script src="scripts/app/common/main-controller.js"></script>
+    <script src="scripts/app/common/data-service.js"></script>
+    <script src="scripts/app/common/notifier.js"></script>
+    <!-- Home -->
+    <script src="scripts/app/home/home-controller.js"></script>
+    <!-- Streams -->
+    <script src="scripts/app/streams/streams-service.js"></script>
+    <script src="scripts/app/streams/streams-featured-directive.js"></script>
+    <script src="scripts/app/streams/streams-summary-directive.js"></script>
+    <!-- Download -->
+    <script src="scripts/app/download/download-controller.js"></script>
+    <script src="scripts/app/download/download-service.js"></script>
+    <!-- Live -->
+    <script src="scripts/app/live/live-controller.js"></script>
+    <!-- Play -->
+    <script src="scripts/app/play/play-controller.js"></script>
+    <!-- MultiTwitch -->
+    <script src="scripts/app/multitwitch/multitwitch-controller.js"></script>
+    <!-- Channel -->
+    <script src="scripts/app/channel/channel-videos-directive.js"></script>
+    <script src="scripts/app/channel/channel-check-directive.js"></script>
+    <script src="scripts/app/channel/channel-service.js"></script>
+    <script src="scripts/app/channel/channel-controller.js"></script>
+    <!-- Identity -->
+    <script src="scripts/app/identity/identity.js"></script>
+    <script src="scripts/app/identity/authorization.js"></script>
+    <script src="scripts/app/identity/auth.js"></script>
+    <script src="scripts/app/identity/login-controller.js"></script>
+    <script src="scripts/app/identity/register-controller.js"></script>
+</body>
+</html>

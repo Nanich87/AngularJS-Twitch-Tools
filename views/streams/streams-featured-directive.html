@@ -1,0 +1,53 @@
+﻿<div ng-init="vm.getFeaturedStreams()" class="panel panel-primary">
+    <div class="panel-heading">
+        <h2>Featured Streams</h2>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <div class="btn-toolbar" role="toolbar" aria-label="Filter">
+                    <div class="btn-group" role="group" aria-label="Sort">
+                        <button ng-class="{'active': sortType == 'title'}" ng-click="sortType = 'title'; sortReverse = !sortReverse" class="btn btn-default">By Title</button>
+                        <button ng-class="{'active': sortType == 'stream.game'}" ng-click="sortType = 'stream.game'; sortReverse = !sortReverse" class="btn btn-default">By Game</button>
+                        <button ng-class="{'active': sortType == 'stream.viewers'}" ng-click="sortType = 'stream.viewers'; sortReverse = !sortReverse" class="btn btn-default">By Viewers</button>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Reload">
+                        <button ng-click="vm.getFeaturedStreams()" class="btn btn-default">Reload</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="input-group">
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                    <input class="form-control ng-valid ng-dirty ng-valid-parse ng-touched" placeholder="Search" ng-model="searchStream" type="text">
+                </div>
+            </div>
+        </div>
+        <div ng-show="vm.showFeaturedStreams" class="row">
+            <div ng-repeat="featuredStream in vm.featuredStreams | orderBy:sortType:sortReverse | filter:searchStream" class="col-md-4">
+                <div class="thumbnail">
+                    <a href="live/{{featuredStream.stream.channel.name}}" title="{{featuredStream.title}}">
+                        <img ng-src="{{featuredStream.stream.preview.medium}}" alt="{{featuredStream.title}}" />
+                    </a>
+                    <div class="caption">
+                        <h3 class="ellipsis">{{featuredStream.stream.game}}</h3>
+                        <p class="ellipsis">{{featuredStream.title || 'No Title'}}</p>
+                        <div class="btn-group" role="group" aria-label="Channel">
+                            <a href="live/{{featuredStream.stream.channel.name}}" class="btn btn-info" role="button">
+                                Live <span class="badge">{{featuredStream.stream.viewers}}</span>
+                            </a>
+                            <a href="channel/{{featuredStream.stream.channel.name}}/broadcasts" class="btn btn-default" role="button">
+                                Channel <span class="badge">{{featuredStream.stream.channel.followers}}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-hide="vm.showFeaturedStreams" class="row">
+            <div class="alert alert-info" role="alert">
+                Cannot get featured streams!
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2>MultiTwitch</h2>
+    </div>
+    <div class="panel-body">
+
+    </div>
+</div>
+<div ng-show="vm.channel.status === 'offline'" class="alert alert-info" role="alert">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Channel is offline!
+</div>
+<div ng-show="vm.channel.status === 'error'" class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> An Error occurred while getting the stream!
+</div>
